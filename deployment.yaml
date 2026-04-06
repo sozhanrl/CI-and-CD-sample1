@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: student-results-app
+  name: student-results
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: student-results
@@ -13,9 +13,8 @@ spec:
         app: student-results
     spec:
       containers:
-      - name: web-app
-        # Replace with your actual Docker Hub image path
-        image: your_docker_hub_id/student-results:latest
+      - name: student-results-container
+        image: your_docker_hub_username/student-results:latest # Set your image
         ports:
         - containerPort: 80
 ---
@@ -31,5 +30,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-      # This is the port you will use to view the app in your browser
-      nodePort: 30007 
+      nodePort: 30001 # Access via http://<node-ip>:30001
